@@ -1,0 +1,65 @@
+<%- include('../../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../../includes/navigation.ejs') %>
+
+            <h1>Dishes list</h1>
+            <main>
+                <h3></h3>
+                <% if (cartDishes.length> 0) { %>
+                    price: <%= finalPrice %>
+                    <ul class="cart__item-list">
+                        <% cartDishes.forEach(i=> { %>
+                            <li class="cart__item">
+                                <h1>
+                                    name: <%= i.dishId.name %>
+                                </h1>
+                                <h2>
+                                    price: <%= i.dishId.price %>
+                                </h2>
+                                <h2>Quantity: <%= i.quantity %>
+                                </h2>
+                                <form action="/admin/delete-dish-from-cart" method="POST">
+                                    <input type="hidden" value="<%= i.dishId._id %>" name="dishId">
+                                    <button class="btn danger" type="submit">Delete</button>
+                                </form>
+                            </li>
+                            <% }) %>
+                    </ul>
+                    <hr>
+                    <div class="centered">
+                        <form action="/admin/dishes-create-order" method="POST">
+                            <button type="submit" class="btn">Order Now!</button>
+                        </form>
+                    </div>
+
+                    <% } else { %>
+                        <h1>No Products in Cart!</h1>
+                        <% } %>
+                            <% if (dishes.length> 0) { %>
+                                <div class="grid">
+                                    <ul class="roomsList">
+                                        <% for (let dish of dishes) { %>
+                                            <li>
+                                                <div class="left">
+                                                    <h3>
+                                                        <%= dish.name %>
+                                                    </h3>
+                                                    <h4>cena: <%= dish.price %>
+                                                    </h4>
+                                                </div>
+                                                <%- include('./dish-add-to-cart.ejs', {dish: dish}) %>
+
+
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                </div>
+                                <% } else { %>
+                                    <h1>No Products Found!</h1>
+                                    <% } %>
+            </main>
+    </body>
+
+    </html>

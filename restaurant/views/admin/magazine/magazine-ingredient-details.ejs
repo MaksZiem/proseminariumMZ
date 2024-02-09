@@ -1,0 +1,33 @@
+<%- include('../../includes/head.ejs') %>
+    </head>
+
+    <body>
+        <%- include('../../includes/navigation.ejs') %>
+        <main class="centered">
+          
+            <% if (ingredients.length> 0) { %>
+                <div class="grid">
+                    
+                    <ul class="roomsList">
+                        <% for (let ingredient of ingredients) { %>
+                            <li>
+                                <div class="left">
+                                    <h3>
+                                        name: <%= ingredient.name %>
+                                    </h3>
+                                    <h4>
+                                        weight: <%= ingredient.weight %>
+                                    </h4>
+                                    <h4>
+                                        date: <%= ingredient.expirationDate %>
+                                    </h4>
+                                </div>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
+                <% } else { %>
+                    <h1>No Products Found!</h1>
+                    <% } %>
+        </main>
+        <%- include('../../includes/end.ejs') %>

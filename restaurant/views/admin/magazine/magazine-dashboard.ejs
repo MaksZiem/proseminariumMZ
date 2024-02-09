@@ -1,0 +1,33 @@
+<%- include('../../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/magazine.css">
+    </head>
+
+    <body>
+        <%- include('../../includes/navigation.ejs') %>
+            <h1><a href="/admin/magazine-add-ingredient-dashboard">Add ingredient to magazine</a></h1>
+            <% if (ingredients.length> 0) { %>
+                <div class="grid">
+                    
+                    <ul class="roomsList">
+                        <% for (let ingredient of ingredients) { %>
+                            <li>
+                                <div class="left">
+                                    <h3>
+                                        <%= ingredient.name %>
+                                    </h3>
+                                </div>
+                                
+                                <div class="details">
+                                    <a href="magazine-ingredient-details/ingredient/<%= ingredient._id %>"
+                                        class="details" >Details</a>
+                                </div>
+                            </li>
+                            <% } %>
+                    </ul>
+                </div>
+                <% } else { %>
+                    <h1>No Products Found!</h1>
+                    <% } %>
+    </body>
+
+    </html>

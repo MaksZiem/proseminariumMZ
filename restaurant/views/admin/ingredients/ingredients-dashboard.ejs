@@ -1,0 +1,84 @@
+<%- include('../../includes/head.ejs') %>
+    </head>
+    <body>
+        <%- include('../../includes/navigation.ejs') %>
+            <main>
+                <h1>New dish:</h1>
+                <% if (cartIngredients.length> 0) { %>
+                    <ul class="cart__item-list">
+                        <% cartIngredients.forEach(i=> { %>
+                            <li class="cart__item">
+                                <h3>
+                                    <%= i.ingredientTemplateId.name %>
+                                </h3>
+                                <h4>weight: <%= i.weight %>
+                                </h4>
+                                <form action="/admin/delete-ingredient-from-cart" method="POST">
+                                    <input type="hidden" value="<%= i.ingredientTemplateId._id %>" name="ingredientTemplateId">
+                                    <button class="btn danger" type="submit">Delete</button>
+                                </form>
+                            </li>
+
+        
+                            <% }) %>
+                            <form class="product-form" action="/admin/ingredients-create-dish" method="POST">
+                            <div class="centered">
+                                <div class="form-control">
+                                    <label for="name">name</label>
+                                    <input type="text" name="name" id="name" value="">
+                                </div>
+                                <div class="form-control">
+                                    <label for="price">Price</label>
+                                    <input type="number" name="price" id="price" step="0.01" value="">
+                                </div>
+                            </div>    
+        
+                                <div class="centered">
+                                    
+                                        <button type="submit" class="btn">Order Now!</button>
+                                    
+                                </div>
+                        </form>
+                            <% 
+                            
+                        
+                        } else { %>
+                                <h3>No Products in Cart!</h3>
+                                <% } %>
+                              
+
+                        
+               
+                    <a href="/admin/ingredients-dashboard/?category=fruit">fruit</a>
+                    <a href="/admin/ingredients-dashboard/?category=vegetable">vegetable</a>
+
+                            <% if (ingredientTemplates.length> 0) { %>
+                                <div class="grid">
+                                    <ul class="roomsList">
+                                        <% for (let ingredientTemplate of ingredientTemplates) { %>
+                                            <li>
+                                            <div class="left">
+                                                <h2>
+                                                    template <%= ingredientTemplate.name %>
+                                                </h2>
+                                                <h3>category: <%= ingredientTemplate.category %></h3>
+                                                <div class="card__actions">
+                                                    <%- include('./ingredient-add-to-cart.ejs', {ingredientTemplate: ingredientTemplate})
+                                                    %>
+                                                </div>
+                                    
+                                           
+                                        </div>
+                                        </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                                <% } else { %>
+                                    <h1>No Products Found!</h1>
+                                    <% } %>
+
+                                    
+            </main>
+    </body>
+
+    </html>
